@@ -12,11 +12,22 @@ public class Main {
         int emptyCellIndex = init(input, intialNodeState);
         TreeNodeState root = new TreeNodeState(intialNodeState, emptyCellIndex, 0);
 
-            searchAlgorithms.BFS(root);
+            //searchAlgorithms.BFS(root);
             System.out.println();
 
-            System.out.println("DFS");
-            searchAlgorithms.DFS(root);
+//            System.out.println("DFS");
+            //searchAlgorithms.DFS(root);
+            System.out.println();
+
+            System.out.println("Euclidean");
+
+            searchAlgorithms.Euclidean_A_Star(root);
+            System.out.println();
+
+            System.out.println("Manhattan");
+
+            searchAlgorithms.Manhattan_A_Star(root);
+
         }
 
     }

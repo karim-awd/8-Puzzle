@@ -57,22 +57,24 @@ public class SearchAlgorithms {
         while(!frontier.isEmpty()){
             TreeNode state = frontier.poll();
             exploredNodes.add(state.getStringRepresentation());
+            setAsExplored(exploredNodes, state);
             state.print();
             System.out.println("Step: "+state.getDepth());
+            System.out.println("Cost: "+state.getDistanceByEuclidean());
             if(state.isGoalState()){
                 System.out.println("END");
                 return;
             }
-            if(!exploredNodes.contains(state.getStringRepresentation()) && !frontier.contains(state)) { //if not explored then it wasn't created before hence it is not in the queue
-                setAsExplored(exploredNodes, state);
                 ArrayList<TreeNode> children = state.getChildren();
                 for (TreeNode child : children) {
-                    frontier.add(child);
+                    if(!exploredNodes.contains(child.getStringRepresentation()) && !frontier.contains(child)) { //if not explored then it wasn't created before hence it is not in the queue
+                        frontier.add(child);
+                    }
+                    else if(frontier.contains(state)){
+                        frontier.add(state);
+                    }
                 }
-            }
-            else if(frontier.contains(state)){
-                frontier.add(state);
-            }
+
         }
     }
 
@@ -86,20 +88,21 @@ public class SearchAlgorithms {
             exploredNodes.add(state.getStringRepresentation());
             state.print();
             System.out.println("Step: "+state.getDepth());
+            System.out.println("Cost: "+state.getDistanceByEuclidean());
             if(state.isGoalState()){
                 System.out.println("END");
                 return;
             }
-            if(!exploredNodes.contains(state.getStringRepresentation()) && !frontier.contains(state)) { //if not explored then it wasn't created before hence it is not in the queue
-                setAsExplored(exploredNodes, state);
-                ArrayList<TreeNode> children = state.getChildren();
-                for (TreeNode child : children) {
+            ArrayList<TreeNode> children = state.getChildren();
+            for (TreeNode child : children) {
+                if(!exploredNodes.contains(child.getStringRepresentation()) && !frontier.contains(child)) { //if not explored then it wasn't created before hence it is not in the queue
                     frontier.add(child);
                 }
+                else if(frontier.contains(state)){
+                    frontier.add(state);
+                }
             }
-            else if(frontier.contains(state)){ // decrease the state distance in queue
-                frontier.add(state);
-            }
+
         }
     }
 

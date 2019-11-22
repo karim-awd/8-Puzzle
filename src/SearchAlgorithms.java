@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 
 public class SearchAlgorithms {
-    private final int MAXDEPTH = 100;
+    private final int MAXDEPTH = 20;
     public void BFS(TreeNode root){
         HashSet<String> exploredNodes = new HashSet<>();
         ArrayList<TreeNode> frontier = new ArrayList<>();
@@ -32,11 +32,12 @@ public class SearchAlgorithms {
             }
         }
     }
-    public void DFS(TreeNode state, int depth){
+    public boolean DFS(TreeNode state, int depth){
         HashSet<String> exploredNodes = new HashSet<>();
         if(state.isGoalState()){
+            System.out.println(state.getStringRepresentation());
             System.out.println("END");
-            return;
+            return true;
         }
         if(!isExplored(exploredNodes, state)) {
             //state.print();
@@ -45,10 +46,14 @@ public class SearchAlgorithms {
             ArrayList<TreeNode> children = state.getChildren();
             for (TreeNode child : children){
                 if(depth < MAXDEPTH) {
-                    DFS(child, depth + 1);
+                    boolean retVal = DFS(child, depth + 1);
+                    if(retVal){
+                        return retVal;
+                    }
                 }
             }
         }
+        return false;
     }
     public static void A_Star(TreeNode root){
         PriorityQueue<TreeNode> priorityQueue = new PriorityQueue<>();

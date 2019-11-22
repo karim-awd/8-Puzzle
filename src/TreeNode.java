@@ -8,6 +8,8 @@ public interface TreeNode {
 
     int getDistanceByEuclidean ();
 
+    int getDepth();
+
     boolean isGoalState ();
 
     ArrayList<TreeNode> getChildren ();

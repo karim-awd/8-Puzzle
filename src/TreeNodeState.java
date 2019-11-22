@@ -49,6 +49,11 @@ public class TreeNodeState implements TreeNode {
     }
 
     @Override
+    public int getDepth() {
+        return depth;
+    }
+
+    @Override
     public boolean isGoalState() {
         return goalState.equals(strRepresentation);
     }

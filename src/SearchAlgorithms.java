@@ -5,7 +5,6 @@ import java.util.*;
 public class SearchAlgorithms {
     private final int MAXDEPTH = 20;
     public void BFS(TreeNode root){
-        int steps = 0;
         HashSet<String> exploredNodes = new HashSet<>();
         ArrayList<TreeNode> frontier = new ArrayList<>();
         frontier.add(root);
@@ -13,8 +12,7 @@ public class SearchAlgorithms {
             TreeNode state = frontier.remove(0);
             setAsExplored(exploredNodes, state);
             state.print();
-            System.out.println("Step: "+steps);
-            steps++;
+            System.out.println("Step: "+state.getDepth());
             if(state.isGoalState()){
                 System.out.println("END");
                 return;
@@ -29,7 +27,6 @@ public class SearchAlgorithms {
     }
     int st = 0;
     public void DFS(TreeNode root) {
-        int steps = 0;
         HashSet<String> exploredNodes = new HashSet<>();
         Stack<TreeNode> frontier = new Stack<>();
         frontier.add(root);
@@ -37,8 +34,7 @@ public class SearchAlgorithms {
             TreeNode state = frontier.pop();
             setAsExplored(exploredNodes, state);
             state.print();
-            System.out.println("Step: " + steps);
-            steps++;
+            System.out.println("Step: " + state.getDepth());
             if (state.isGoalState()) {
                 System.out.println("END");
                 return;
@@ -62,6 +58,7 @@ public class SearchAlgorithms {
             TreeNode state = frontier.poll();
             exploredNodes.add(state.getStringRepresentation());
             state.print();
+            System.out.println("Step: "+state.getDepth());
             if(state.isGoalState()){
                 System.out.println("END");
                 return;
@@ -88,6 +85,7 @@ public class SearchAlgorithms {
             TreeNode state = frontier.poll();
             exploredNodes.add(state.getStringRepresentation());
             state.print();
+            System.out.println("Step: "+state.getDepth());
             if(state.isGoalState()){
                 System.out.println("END");
                 return;

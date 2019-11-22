@@ -1,9 +1,6 @@
 import sun.reflect.generics.tree.Tree;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class SearchAlgorithms {
     private final int MAXDEPTH = 20;
@@ -11,41 +8,34 @@ public class SearchAlgorithms {
         HashSet<String> exploredNodes = new HashSet<>();
         ArrayList<TreeNode> frontier = new ArrayList<>();
         frontier.add(root);
-        HashSet<TreeNode> inQueue = new HashSet<>();
         while(!frontier.isEmpty()){
             TreeNode state = frontier.remove(0);
+            setAsExplored(exploredNodes, state);
             state.print();
-            inQueue.add(state);
             if(state.isGoalState()){
                 System.out.println("END");
                 return;
             }
-            if(!isExplored(exploredNodes, state)) { //if not explored then it wasn't created before hence it is not in the queue
-                setAsExplored(exploredNodes, state);
                 ArrayList<TreeNode> children = state.getChildren();
                 for (TreeNode child : children) {
-                    //could check if it is in queue or not
-                    frontier.add(child);
-                    inQueue.add(state);
+                    if(!isExplored(exploredNodes, child)) { //if not explored then it wasn't created before hence it is not in the queue
+                        frontier.add(child);
+                    }
                 }
-            }
         }
     }
-    public boolean DFS(TreeNode state, int depth){
-        HashSet<String> exploredNodes = new HashSet<>();
+    public boolean DFS(TreeNode state, int depth, HashSet<String> exploredNodes){
+        setAsExplored(exploredNodes, state);
+        state.print();
         if(state.isGoalState()){
-            System.out.println(state.getStringRepresentation());
             System.out.println("END");
             return true;
         }
-        if(!isExplored(exploredNodes, state)) {
-            //state.print();
-            System.out.println(state.getStringRepresentation());
-            setAsExplored(exploredNodes, state);
-            ArrayList<TreeNode> children = state.getChildren();
-            for (TreeNode child : children){
+        ArrayList<TreeNode> children = state.getChildren();
+        for (TreeNode child : children){
+            if(!isExplored(exploredNodes, child)) {
                 if(depth < MAXDEPTH) {
-                    boolean retVal = DFS(child, depth + 1);
+                    boolean retVal = DFS(child, depth + 1, exploredNodes);
                     if(retVal){
                         return retVal;
                     }
@@ -54,9 +44,58 @@ public class SearchAlgorithms {
         }
         return false;
     }
-    public static void A_Star(TreeNode root){
-        PriorityQueue<TreeNode> priorityQueue = new PriorityQueue<>();
 
+
+    public  void Euclidean_A_Star(TreeNode root){
+        int initialCapacity = 1;
+        PriorityQueue<TreeNode> frontier = new PriorityQueue<>(initialCapacity,new EuclideanComparator());
+        HashSet<String> exploredNodes = new HashSet<>();
+        frontier.add(root);
+        while(!frontier.isEmpty()){
+            TreeNode state = frontier.poll();
+            exploredNodes.add(state.getStringRepresentation());
+            state.print();
+            if(state.isGoalState()){
+                System.out.println("END");
+                return;
+            }
+            if(!exploredNodes.contains(state.getStringRepresentation()) && !frontier.contains(state)) { //if not explored then it wasn't created before hence it is not in the queue
+                setAsExplored(exploredNodes, state);
+                ArrayList<TreeNode> children = state.getChildren();
+                for (TreeNode child : children) {
+                    frontier.add(child);
+                }
+            }
+            else if(frontier.contains(state)){
+                frontier.add(state);
+            }
+        }
+    }
+
+    public  void Manhattan_A_Star(TreeNode root){
+        int initialCapacity = 1;
+        PriorityQueue<TreeNode> frontier = new PriorityQueue<>(initialCapacity,new ManhattanComparator());
+        HashSet<String> exploredNodes = new HashSet<>();
+        frontier.add(root);
+        while(!frontier.isEmpty()){
+            TreeNode state = frontier.poll();
+            exploredNodes.add(state.getStringRepresentation());
+            state.print();
+            if(state.isGoalState()){
+                System.out.println("END");
+                return;
+            }
+            if(!exploredNodes.contains(state.getStringRepresentation()) && !frontier.contains(state)) { //if not explored then it wasn't created before hence it is not in the queue
+                setAsExplored(exploredNodes, state);
+                ArrayList<TreeNode> children = state.getChildren();
+                for (TreeNode child : children) {
+                    frontier.add(child);
+                }
+            }
+            else if(frontier.contains(state)){ // decrease the state distance in queue
+                frontier.add(state);
+            }
+        }
     }
 
     public void setAsExplored(HashSet<String> exploredNodes, TreeNode state) {
@@ -67,4 +106,23 @@ public class SearchAlgorithms {
         return exploredNodes.contains(state.getStringRepresentation());
     }
 
+}
+class EuclideanComparator implements Comparator<TreeNode> {
+  public int compare(TreeNode t1, TreeNode t2) {
+        if (t1.getEuclideanDistance() > t2.getEuclideanDistance())
+            return 1;
+        else if (t1.getEuclideanDistance() < t2.getEuclideanDistance())
+            return -1;
+        return 0;
+    }
+}
+
+class ManhattanComparator implements Comparator<TreeNode> {
+    public int compare(TreeNode t1, TreeNode t2) {
+        if (t1.getManhattanDistance() > t2.getManhattanDistance())
+            return 1;
+        else if (t1.getManhattanDistance() < t2.getManhattanDistance())
+            return -1;
+        return 0;
+    }
 }

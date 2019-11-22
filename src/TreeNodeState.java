@@ -7,6 +7,7 @@ public class TreeNodeState implements TreeNode {
     private int emptyCellIndex ;
     private int [] nodeState;
     private String strRepresentation;
+    private String goalState = "[0, 1, 2, 3, 4, 5, 6, 7, 8]";
 
     public TreeNodeState (int []nodeState, int emptyCellIndex){
         this.emptyCellIndex = emptyCellIndex;
@@ -30,7 +31,7 @@ public class TreeNodeState implements TreeNode {
 
     @Override
     public boolean isGoalState() {
-        return false;
+        return goalState.equals(strRepresentation);
     }
 
     @Override

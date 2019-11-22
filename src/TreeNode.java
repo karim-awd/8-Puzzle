@@ -1,10 +1,12 @@
 public interface TreeNode {
 
-    public void setExploredState (boolean exploredState);
+    void setExploredState (boolean exploredState);
 
-    public boolean isExplired();
+    boolean isExplired();
 
-    public int getSCoreToNode ();
+    int getSCoreToNode ();
+
+    boolean isGoalState (TreeNode r);
 
 
 }

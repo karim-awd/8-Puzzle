@@ -51,6 +51,7 @@ public class SearchAlgorithms {
             }
         }
     }
+
     public static void A_Star(TreeNode root){
         PriorityQueue<TreeNode> priorityQueue = new PriorityQueue<>();
 

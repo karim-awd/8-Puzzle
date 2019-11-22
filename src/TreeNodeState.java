@@ -6,13 +6,17 @@ public class TreeNodeState implements TreeNode {
 
     private int emptyCellIndex;
     private int[] nodeState;
+    int[][] prettyState = new int[3][3];
     private String strRepresentation;
     private String goalState = "[0, 1, 2, 3, 4, 5, 6, 7, 8]";
+    private int depth;
 
-    public TreeNodeState(int[] nodeState, int emptyCellIndex) {
+    public TreeNodeState(int[] nodeState, int emptyCellIndex, int depth) {
         this.emptyCellIndex = emptyCellIndex;
         this.nodeState = nodeState;
         this.strRepresentation = Arrays.toString(nodeState);
+        this.depth = depth;
+        this.buildGrid();
     }
 
 
@@ -22,13 +26,29 @@ public class TreeNodeState implements TreeNode {
     }
 
     @Override
-    public int getManhattanDistance() {
-        return 0;
+    public int getDistanceByManhattan() {
+        int totalDistance = 0;
+
+        for (int x = 0; x<3; x++){
+            for (int y = 0; y< 3; y++){
+                totalDistance += Math.abs(x- prettyState[x][y]/3) + Math.abs(y- prettyState[x][y]%3);
+            }
+        }
+
+        return totalDistance + this.depth;
     }
 
     @Override
-    public int getEuclideanDistance() {
-        return 0;
+    public int getDistanceByEuclidean() {
+        int totalDistance = 0;
+
+        for (int x = 0; x<3; x++){
+            for (int y = 0; y< 3; y++){
+                totalDistance += Math.pow((x- (prettyState[x][y]/3)),2) + Math.pow((y- (prettyState[x][y]%3)),2);
+            }
+        }
+
+        return totalDistance + this.depth;
     }
 
     @Override
@@ -54,20 +74,21 @@ public class TreeNodeState implements TreeNode {
         return children;
     }
 
+    private void buildGrid() {
+        int col = 0;
+        int row = 0;
+        for (int cell : nodeState) {
+            if (col == 3) {
+                col = 0;
+                row++;
+            }
+            prettyState[row][col] = cell;
+            col++;
+        }
+    }
+
     @Override
     public void print() {
-        int row = 0;
-        int col = 0;
-        int[][] prettyState = new int[3][3];
-        for (int cell : nodeState) {
-            if (row == 3) {
-                row = 0;
-                col++;
-            }
-            prettyState[col][row] = cell;
-            row++;
-        }
-
         System.out.println(Arrays.toString(prettyState[0]));
         System.out.println(Arrays.toString(prettyState[1]));
         System.out.println(Arrays.toString(prettyState[2]));
@@ -78,7 +99,7 @@ public class TreeNodeState implements TreeNode {
         int[] childNodeState = nodeState.clone();
         childNodeState[emptyCellIndex] = childNodeState[gotoIndex];
         childNodeState[gotoIndex] = 0;
-        return new TreeNodeState(childNodeState, gotoIndex);
+        return new TreeNodeState(childNodeState, gotoIndex, this.depth + 1);
     }
 
 }

@@ -9,7 +9,7 @@ public class Main {
 
         int [] intialNodeState = new int [9];
         int emptyCellIndex = init(input, intialNodeState);
-        TreeNodeState root = new TreeNodeState(intialNodeState, emptyCellIndex);
+        TreeNodeState root = new TreeNodeState(intialNodeState, emptyCellIndex, 0);
 
         searchAlgorithms.BFS(root);
 //        searchAlgorithms.DFS(root,0);

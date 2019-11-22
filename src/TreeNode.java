@@ -4,9 +4,9 @@ public interface TreeNode {
 
     String getStringRepresentation ();
 
-    int getManhattanDistance ();
+    int getDistanceByManhattan ();
 
-    int getEuclideanDistance ();
+    int getDistanceByEuclidean ();
 
     boolean isGoalState ();
 

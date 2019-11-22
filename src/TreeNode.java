@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public interface TreeNode {
 
     void setExploredState (boolean exploredState);
@@ -8,9 +10,7 @@ public interface TreeNode {
 
     int getEuclideanDistance ();
 
-    boolean isGoalState (TreeNode root);
+    boolean isGoalState ();
 
-    TreeNode getChildren (TreeNode node);
-
-
+    ArrayList<TreeNode> getChildren ();
 }

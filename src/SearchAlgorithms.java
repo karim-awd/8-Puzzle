@@ -1,14 +1,16 @@
 import sun.reflect.generics.tree.Tree;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
 public class SearchAlgorithms {
     private final int MAXDEPTH = 100;
     public void BFS(TreeNode root){
+        HashSet<String> exploredNodes = new HashSet<>();
         ArrayList<TreeNode> frontier = new ArrayList<>();
-        root.setAsExplored();
+        setAsExplored(exploredNodes, root);
         frontier.add(root);
         HashSet<TreeNode> inQueue = new HashSet<>();
         while(!frontier.isEmpty()){
@@ -18,7 +20,7 @@ public class SearchAlgorithms {
             if(state.isGoalState()){
                 return;
             }
-            if(!state.isExplored()) { //if not explored then it wasn't created before hence it is not in the queue
+            if(!isExplored(exploredNodes, state)) { //if not explored then it wasn't created before hence it is not in the queue
                 ArrayList<TreeNode> children = state.getChildren();
                 for (TreeNode child : children) {
                     //could check if it is in queue or not
@@ -29,12 +31,13 @@ public class SearchAlgorithms {
         }
     }
     public void DFS(TreeNode state, int depth){
+        HashSet<String> exploredNodes = new HashSet<>();
         if(state.isGoalState()){
             return;
         }
-        if(!state.isExplored()) {
+        if(!isExplored(exploredNodes, state)) {
             //state.print();
-            state.setAsExplored();
+            setAsExplored(exploredNodes, state);
             ArrayList<TreeNode> children = state.getChildren();
             for (TreeNode child : children){
                 if(depth < MAXDEPTH) {
@@ -47,4 +50,13 @@ public class SearchAlgorithms {
         PriorityQueue<TreeNode> priorityQueue = new PriorityQueue<>();
 
     }
+
+    public void setAsExplored(HashSet<String> exploredNodes, TreeNode state) {
+        exploredNodes.add(state.getStringRepresentation());
+    }
+
+    public boolean isExplored(HashSet<String> exploredNodes, TreeNode state) {
+        return exploredNodes.contains(state.getStringRepresentation());
+    }
+
 }

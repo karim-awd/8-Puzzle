@@ -7,7 +7,6 @@ public class TreeNodeState implements TreeNode {
     private int emptyCellIndex ;
     private int [] nodeState;
     private String strRepresentation;
-    private HashSet<String> exploredNodes = new HashSet<>();
 
     public TreeNodeState (int []nodeState, int emptyCellIndex){
         this.emptyCellIndex = emptyCellIndex;
@@ -15,15 +14,9 @@ public class TreeNodeState implements TreeNode {
         this.strRepresentation= Arrays.toString(nodeState);
     }
 
-    @Override
-    public void setAsExplored() {
-        exploredNodes.add(strRepresentation);
-    }
 
     @Override
-    public boolean isExplored() {
-        return exploredNodes.contains(strRepresentation);
-    }
+    public String getStringRepresentation() { return strRepresentation; }
 
     @Override
     public int getManhattanDistance() {

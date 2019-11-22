@@ -2,9 +2,7 @@ import java.util.ArrayList;
 
 public interface TreeNode {
 
-    void setAsExplored ();
-
-    boolean isExplored ();
+    String getStringRepresentation ();
 
     int getManhattanDistance ();
 

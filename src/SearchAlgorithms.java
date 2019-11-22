@@ -5,6 +5,7 @@ import java.util.*;
 public class SearchAlgorithms {
     private final int MAXDEPTH = 20;
     public void BFS(TreeNode root){
+        int steps = 0;
         HashSet<String> exploredNodes = new HashSet<>();
         ArrayList<TreeNode> frontier = new ArrayList<>();
         frontier.add(root);
@@ -12,37 +13,43 @@ public class SearchAlgorithms {
             TreeNode state = frontier.remove(0);
             setAsExplored(exploredNodes, state);
             state.print();
+            System.out.println("Step: "+steps);
+            steps++;
             if(state.isGoalState()){
                 System.out.println("END");
                 return;
             }
-                ArrayList<TreeNode> children = state.getChildren();
-                for (TreeNode child : children) {
-                    if(!isExplored(exploredNodes, child)) { //if not explored then it wasn't created before hence it is not in the queue
-                        frontier.add(child);
-                    }
-                }
+            ArrayList<TreeNode> children = state.getChildren();
+            for (TreeNode child : children) {
+               if(!isExplored(exploredNodes, child)) { //if not explored then it wasn't created before hence it is not in the queue
+                   frontier.add(child);
+               }
+            }
         }
     }
-    public boolean DFS(TreeNode state, int depth, HashSet<String> exploredNodes){
-        setAsExplored(exploredNodes, state);
-        state.print();
-        if(state.isGoalState()){
-            System.out.println("END");
-            return true;
-        }
-        ArrayList<TreeNode> children = state.getChildren();
-        for (TreeNode child : children){
-            if(!isExplored(exploredNodes, child)) {
-                if(depth < MAXDEPTH) {
-                    boolean retVal = DFS(child, depth + 1, exploredNodes);
-                    if(retVal){
-                        return retVal;
-                    }
+    int st = 0;
+    public void DFS(TreeNode root) {
+        int steps = 0;
+        HashSet<String> exploredNodes = new HashSet<>();
+        Stack<TreeNode> frontier = new Stack<>();
+        frontier.add(root);
+        while (!frontier.isEmpty()) {
+            TreeNode state = frontier.pop();
+            setAsExplored(exploredNodes, state);
+            state.print();
+            System.out.println("Step: " + steps);
+            steps++;
+            if (state.isGoalState()) {
+                System.out.println("END");
+                return;
+            }
+            ArrayList<TreeNode> children = state.getChildren();
+            for (TreeNode child : children) {
+                if (!isExplored(exploredNodes, child)) { //if not explored then it wasn't created before hence it is not in the queue
+                    frontier.add(child);
                 }
             }
         }
-        return false;
     }
 
 

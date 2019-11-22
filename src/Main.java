@@ -4,15 +4,21 @@ public class Main {
     public static void main(String[] args){
         SearchAlgorithms searchAlgorithms = new SearchAlgorithms();
 
-        Scanner s = new Scanner(System.in);
-        String input = s.nextLine();
+        while(true) {
+            Scanner s = new Scanner(System.in);
+            String input = s.nextLine();
 
         int [] intialNodeState = new int [9];
         int emptyCellIndex = init(input, intialNodeState);
         TreeNodeState root = new TreeNodeState(intialNodeState, emptyCellIndex, 0);
 
-        searchAlgorithms.BFS(root);
-//        searchAlgorithms.DFS(root,0);
+            searchAlgorithms.BFS(root);
+            System.out.println();
+
+            System.out.println("DFS");
+            searchAlgorithms.DFS(root);
+        }
+
     }
 
     private static int init(String input, int[] intialNodeState) {

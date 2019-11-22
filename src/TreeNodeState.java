@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 
 public class TreeNodeState implements TreeNode {
 
@@ -41,13 +40,11 @@ public class TreeNodeState implements TreeNode {
     @Override
     public int getDistanceByEuclidean() {
         int totalDistance = 0;
-
         for (int x = 0; x<3; x++){
             for (int y = 0; y< 3; y++){
-                totalDistance += Math.pow((x- (prettyState[x][y]/3)),2) + Math.pow((y- (prettyState[x][y]%3)),2);
+                totalDistance += Math.sqrt(Math.pow((x- (prettyState[x][y]/3)),2) + Math.pow((y- (prettyState[x][y]%3)),2));
             }
         }
-
         return totalDistance + this.depth;
     }
 

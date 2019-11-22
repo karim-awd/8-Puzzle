@@ -8,7 +8,7 @@ public class SearchAlgorithms {
     private final int MAXDEPTH = 100;
     public void BFS(TreeNode root){
         ArrayList<TreeNode> frontier = new ArrayList<>();
-        root.setExploredState(true);
+        root.setAsExplored();
         frontier.add(root);
         HashSet<TreeNode> inQueue = new HashSet<>();
         while(!frontier.isEmpty()){
@@ -34,7 +34,7 @@ public class SearchAlgorithms {
         }
         if(!state.isExplored()) {
             //state.print();
-            state.setExploredState(true);
+            state.setAsExplored();
             ArrayList<TreeNode> children = state.getChildren();
             for (TreeNode child : children){
                 if(depth < MAXDEPTH) {

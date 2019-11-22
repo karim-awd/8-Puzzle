@@ -11,7 +11,7 @@ public class Main {
         int emptyCellIndex = init(input, intialNodeState);
         TreeNodeState root = new TreeNodeState(intialNodeState, emptyCellIndex);
 
-        searchAlgorithms.BFS(root);
+        //searchAlgorithms.BFS(root);
         searchAlgorithms.DFS(root,0);
     }
 

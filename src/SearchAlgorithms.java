@@ -116,9 +116,9 @@ public class SearchAlgorithms {
 }
 class EuclideanComparator implements Comparator<TreeNode> {
   public int compare(TreeNode t1, TreeNode t2) {
-        if (t1.getEuclideanDistance() > t2.getEuclideanDistance())
+        if (t1.getDistanceByEuclidean() > t2.getDistanceByEuclidean())
             return 1;
-        else if (t1.getEuclideanDistance() < t2.getEuclideanDistance())
+        else if (t1.getDistanceByEuclidean() < t2.getDistanceByEuclidean())
             return -1;
         return 0;
     }
@@ -126,9 +126,9 @@ class EuclideanComparator implements Comparator<TreeNode> {
 
 class ManhattanComparator implements Comparator<TreeNode> {
     public int compare(TreeNode t1, TreeNode t2) {
-        if (t1.getManhattanDistance() > t2.getManhattanDistance())
+        if (t1.getDistanceByManhattan() > t2.getDistanceByManhattan())
             return 1;
-        else if (t1.getManhattanDistance() < t2.getManhattanDistance())
+        else if (t1.getDistanceByManhattan() < t2.getDistanceByManhattan())
             return -1;
         return 0;
     }

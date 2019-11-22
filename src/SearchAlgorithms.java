@@ -10,7 +10,6 @@ public class SearchAlgorithms {
     public void BFS(TreeNode root){
         HashSet<String> exploredNodes = new HashSet<>();
         ArrayList<TreeNode> frontier = new ArrayList<>();
-        setAsExplored(exploredNodes, root);
         frontier.add(root);
         HashSet<TreeNode> inQueue = new HashSet<>();
         while(!frontier.isEmpty()){
@@ -19,9 +18,11 @@ public class SearchAlgorithms {
             System.out.println(state.getStringRepresentation());
             inQueue.add(state);
             if(state.isGoalState()){
+                System.out.println("END");
                 return;
             }
             if(!isExplored(exploredNodes, state)) { //if not explored then it wasn't created before hence it is not in the queue
+                setAsExplored(exploredNodes, state);
                 ArrayList<TreeNode> children = state.getChildren();
                 for (TreeNode child : children) {
                     //could check if it is in queue or not
@@ -34,6 +35,7 @@ public class SearchAlgorithms {
     public void DFS(TreeNode state, int depth){
         HashSet<String> exploredNodes = new HashSet<>();
         if(state.isGoalState()){
+            System.out.println("END");
             return;
         }
         if(!isExplored(exploredNodes, state)) {

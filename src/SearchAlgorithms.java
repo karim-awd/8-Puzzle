@@ -7,6 +7,7 @@ import java.util.PriorityQueue;
 
 public class SearchAlgorithms {
     private final int MAXDEPTH = 100;
+
     public void BFS(TreeNode root){
         HashSet<String> exploredNodes = new HashSet<>();
         ArrayList<TreeNode> frontier = new ArrayList<>();
@@ -14,8 +15,7 @@ public class SearchAlgorithms {
         HashSet<TreeNode> inQueue = new HashSet<>();
         while(!frontier.isEmpty()){
             TreeNode state = frontier.remove(0);
-            //state.print();
-            System.out.println(state.getStringRepresentation());
+            state.print();
             inQueue.add(state);
             if(state.isGoalState()){
                 System.out.println("END");
@@ -32,6 +32,7 @@ public class SearchAlgorithms {
             }
         }
     }
+
     public void DFS(TreeNode state, int depth){
         HashSet<String> exploredNodes = new HashSet<>();
         if(state.isGoalState()){

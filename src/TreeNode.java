@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public interface TreeNode {
 
-    void setExploredState (boolean exploredState);
+    void setAsExplored ();
 
     boolean isExplored ();
 

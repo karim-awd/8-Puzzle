@@ -16,6 +16,7 @@ public class SearchAlgorithms {
         while(!frontier.isEmpty()){
             TreeNode state = frontier.remove(0);
             //state.print();
+            System.out.println(state.getStringRepresentation());
             inQueue.add(state);
             if(state.isGoalState()){
                 return;
@@ -37,6 +38,7 @@ public class SearchAlgorithms {
         }
         if(!isExplored(exploredNodes, state)) {
             //state.print();
+            System.out.println(state.getStringRepresentation());
             setAsExplored(exploredNodes, state);
             ArrayList<TreeNode> children = state.getChildren();
             for (TreeNode child : children){

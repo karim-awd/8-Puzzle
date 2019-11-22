@@ -2,11 +2,15 @@ public interface TreeNode {
 
     void setExploredState (boolean exploredState);
 
-    boolean isExplired();
+    boolean isExplored ();
 
-    int getSCoreToNode ();
+    int getManhattanDistance ();
 
-    boolean isGoalState (TreeNode r);
+    int getEuclideanDistance ();
+
+    boolean isGoalState (TreeNode root);
+
+    TreeNode getChildren (TreeNode node);
 
 
 }

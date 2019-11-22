@@ -14,8 +14,7 @@ public class SearchAlgorithms {
         HashSet<TreeNode> inQueue = new HashSet<>();
         while(!frontier.isEmpty()){
             TreeNode state = frontier.remove(0);
-            //state.print();
-            System.out.println(state.getStringRepresentation());
+            state.print();
             inQueue.add(state);
             if(state.isGoalState()){
                 System.out.println("END");

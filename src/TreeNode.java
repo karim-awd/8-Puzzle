@@ -11,4 +11,6 @@ public interface TreeNode {
     boolean isGoalState ();
 
     ArrayList<TreeNode> getChildren ();
+
+    void print();
 }

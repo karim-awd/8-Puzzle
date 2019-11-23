@@ -13,11 +13,11 @@ public class Main {
         int emptyCellIndex = init(input, intialNodeState);
         TreeNodeState root = new TreeNodeState(intialNodeState, emptyCellIndex, 0, new ArrayList<>());
 
-            //searchAlgorithms.BFS(root);
+            searchAlgorithms.BFS(root);
             System.out.println();
 
-//            System.out.println("DFS");
-            //searchAlgorithms.DFS(root);
+            System.out.println("DFS");
+            searchAlgorithms.DFS(root);
             System.out.println();
 
             System.out.println("Euclidean");

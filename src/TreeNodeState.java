@@ -99,6 +99,11 @@ public class TreeNodeState implements TreeNode {
         System.out.println("*********************************************");
     }
 
+    @Override
+    public ArrayList<TreeNode> getPath() {
+        return path;
+    }
+
     private TreeNode swipe(int emptyCellIndex, int gotoIndex) {
         int[] childNodeState = nodeState.clone();
         childNodeState[emptyCellIndex] = childNodeState[gotoIndex];

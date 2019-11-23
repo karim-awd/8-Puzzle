@@ -15,4 +15,6 @@ public interface TreeNode {
     ArrayList<TreeNode> getChildren ();
 
     void print();
+
+    ArrayList<TreeNode> getPath();
 }

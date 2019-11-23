@@ -4,6 +4,7 @@ import java.util.*;
 
 public class SearchAlgorithms {
     private final int MAXDEPTH = 20;
+
     public void BFS(TreeNode root){
         HashSet<String> exploredNodes = new HashSet<>();
         ArrayList<TreeNode> frontier = new ArrayList<>();
@@ -11,10 +12,12 @@ public class SearchAlgorithms {
         while(!frontier.isEmpty()){
             TreeNode state = frontier.remove(0);
             setAsExplored(exploredNodes, state);
-            state.print();
-            System.out.println("Step: "+state.getDepth());
             if(state.isGoalState()){
-                System.out.println("END");
+                for (TreeNode node : state.getPath()){
+                    node.print();
+                }
+                state.print();
+                System.out.println("BFS Cost: "+state.getDepth());
                 return;
             }
             ArrayList<TreeNode> children = state.getChildren();
@@ -33,10 +36,12 @@ public class SearchAlgorithms {
         while (!frontier.isEmpty()) {
             TreeNode state = frontier.pop();
             setAsExplored(exploredNodes, state);
-            state.print();
-            System.out.println("Step: " + state.getDepth());
             if (state.isGoalState()) {
-                System.out.println("END");
+                for (TreeNode node : state.getPath()){
+                    node.print();
+                }
+                state.print();
+                System.out.println("DFS Cost: "+state.getDepth());
                 return;
             }
             ArrayList<TreeNode> children = state.getChildren();
@@ -58,11 +63,16 @@ public class SearchAlgorithms {
             TreeNode state = frontier.poll();
             exploredNodes.add(state.getStringRepresentation());
             setAsExplored(exploredNodes, state);
-            state.print();
-            System.out.println("Step: "+state.getDepth());
-            System.out.println("Cost: "+state.getDistanceByEuclidean());
             if(state.isGoalState()){
-                System.out.println("END");
+                int pathCost = 0;
+                for (TreeNode node : state.getPath()){
+                    node.print();
+                    pathCost += node.getDistanceByEuclidean();
+                }
+                state.print();
+                pathCost += state.getDistanceByEuclidean();
+                System.out.println("Path Depth: "+ state.getDepth());
+                System.out.println("Path Cost: "+ pathCost);
                 return;
             }
                 ArrayList<TreeNode> children = state.getChildren();
@@ -86,11 +96,16 @@ public class SearchAlgorithms {
         while(!frontier.isEmpty()){
             TreeNode state = frontier.poll();
             exploredNodes.add(state.getStringRepresentation());
-            state.print();
-            System.out.println("Step: "+state.getDepth());
-            System.out.println("Cost: "+state.getDistanceByEuclidean());
             if(state.isGoalState()){
-                System.out.println("END");
+                int pathCost = 0;
+                for (TreeNode node : state.getPath()){
+                    node.print();
+                    pathCost += node.getDistanceByManhattan();
+                }
+                state.print();
+                pathCost += state.getDistanceByManhattan();
+                System.out.println("Path Depth: "+ state.getDepth());
+                System.out.println("Path Cost: "+ pathCost);
                 return;
             }
             ArrayList<TreeNode> children = state.getChildren();

@@ -3,7 +3,7 @@ import sun.reflect.generics.tree.Tree;
 import java.util.*;
 
 public class SearchAlgorithms {
-    private final int MAXDEPTH = 25;
+    private final int MAXDEPTH = 100;
 
     public void BFS(TreeNode root) {
         HashSet<String> exploredNodes = new HashSet<>();

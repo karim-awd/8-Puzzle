@@ -12,22 +12,31 @@ public class Main {
             int[] intialNodeState = new int[9];
             int emptyCellIndex = init(input, intialNodeState);
             TreeNodeState root = new TreeNodeState(intialNodeState, emptyCellIndex, 0, new ArrayList<>());
-
+            double before = System.currentTimeMillis();
             searchAlgorithms.BFS(root);
-            System.out.println();
+            double after = System.currentTimeMillis();
 
+            System.out.println("BFS time " + (after - before));
             System.out.println("DFS");
+            before = System.currentTimeMillis();
             searchAlgorithms.DFS(root);
             System.out.println();
+            after = System.currentTimeMillis();
+            System.out.println("DFS time " + (after - before));
 
             System.out.println("Euclidean");
 
+            before = System.currentTimeMillis();
             searchAlgorithms.Euclidean_A_Star(root);
-            System.out.println();
+            after = System.currentTimeMillis();
+            System.out.println("Euclidean time " + (after - before));
 
             System.out.println("Manhattan");
 
+            before = System.currentTimeMillis();
             searchAlgorithms.Manhattan_A_Star(root);
+            after = System.currentTimeMillis();
+            System.out.println("Manahattan time " + (after - before));
 
         }
 

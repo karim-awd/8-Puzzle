@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
 
         int [] intialNodeState = new int [9];
         int emptyCellIndex = init(input, intialNodeState);
-        TreeNodeState root = new TreeNodeState(intialNodeState, emptyCellIndex, 0);
+        TreeNodeState root = new TreeNodeState(intialNodeState, emptyCellIndex, 0, new ArrayList<>());
 
             //searchAlgorithms.BFS(root);
             System.out.println();

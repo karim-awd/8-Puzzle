@@ -9,12 +9,14 @@ public class TreeNodeState implements TreeNode {
     private String strRepresentation;
     private String goalState = "[0, 1, 2, 3, 4, 5, 6, 7, 8]";
     private int depth;
+    private ArrayList<TreeNode> path;
 
-    public TreeNodeState(int[] nodeState, int emptyCellIndex, int depth) {
+    public TreeNodeState(int[] nodeState, int emptyCellIndex, int depth, ArrayList<TreeNode> path) {
         this.emptyCellIndex = emptyCellIndex;
         this.nodeState = nodeState;
         this.strRepresentation = Arrays.toString(nodeState);
         this.depth = depth;
+        this.path = path;
         this.buildGrid();
     }
 
@@ -101,7 +103,9 @@ public class TreeNodeState implements TreeNode {
         int[] childNodeState = nodeState.clone();
         childNodeState[emptyCellIndex] = childNodeState[gotoIndex];
         childNodeState[gotoIndex] = 0;
-        return new TreeNodeState(childNodeState, gotoIndex, this.depth + 1);
+        ArrayList<TreeNode> childPath = new ArrayList<>(path);
+        childPath.add(this);
+        return new TreeNodeState(childNodeState, gotoIndex, this.depth + 1, childPath);
     }
 
 }

@@ -2,17 +2,17 @@ import java.util.ArrayList;
 
 public interface TreeNode {
 
-    String getStringRepresentation ();
+    String getStringRepresentation();
 
-    int getDistanceByManhattan ();
+    int getDistanceByManhattan();
 
-    int getDistanceByEuclidean ();
+    int getDistanceByEuclidean();
 
     int getDepth();
 
-    boolean isGoalState ();
+    boolean isGoalState();
 
-    ArrayList<TreeNode> getChildren ();
+    ArrayList<TreeNode> getChildren();
 
     void print();
 

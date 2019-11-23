@@ -30,9 +30,9 @@ public class TreeNodeState implements TreeNode {
     public int getDistanceByManhattan() {
         int totalDistance = 0;
 
-        for (int x = 0; x<3; x++){
-            for (int y = 0; y< 3; y++){
-                totalDistance += Math.abs(x- prettyState[x][y]/3) + Math.abs(y- prettyState[x][y]%3);
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                totalDistance += Math.abs(x - prettyState[x][y] / 3) + Math.abs(y - prettyState[x][y] % 3);
             }
         }
 
@@ -42,9 +42,9 @@ public class TreeNodeState implements TreeNode {
     @Override
     public int getDistanceByEuclidean() {
         int totalDistance = 0;
-        for (int x = 0; x<3; x++){
-            for (int y = 0; y< 3; y++){
-                totalDistance += Math.sqrt(Math.pow((x- (prettyState[x][y]/3)),2) + Math.pow((y- (prettyState[x][y]%3)),2));
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                totalDistance += Math.sqrt(Math.pow((x - (prettyState[x][y] / 3)), 2) + Math.pow((y - (prettyState[x][y] % 3)), 2));
             }
         }
         return totalDistance + this.depth;
